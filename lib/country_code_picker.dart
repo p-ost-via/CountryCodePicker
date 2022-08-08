@@ -3,6 +3,7 @@ library country_code_picker;
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:country_code_picker/country_code.dart';
 import 'package:country_code_picker/country_codes.dart';
+import 'package:country_code_picker/overlapping_dialog_route.dart';
 import 'package:country_code_picker/selection_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -283,7 +284,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   void showCountryCodePickerDialog() {
     if (!UniversalPlatform.isAndroid && !UniversalPlatform.isIOS) {
-      showDialog(
+      showMaterialDialog(
         barrierColor: widget.barrierColor ?? Colors.grey.withOpacity(0.5),
         // backgroundColor: widget.backgroundColor ?? Colors.transparent,
         context: context,
