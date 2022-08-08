@@ -286,6 +286,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       showDialog(
         barrierColor: widget.barrierColor ?? Colors.grey.withOpacity(0.5),
         // backgroundColor: widget.backgroundColor ?? Colors.transparent,
+        useSafeArea: false,
         context: context,
         builder: (context) => Center(
           child: Container(
