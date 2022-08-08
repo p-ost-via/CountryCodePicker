@@ -287,6 +287,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         barrierColor: widget.barrierColor ?? Colors.grey.withOpacity(0.5),
         // backgroundColor: widget.backgroundColor ?? Colors.transparent,
         context: context,
+        useSafeArea: false,
         builder: (context) => Center(
           child: Container(
             constraints: BoxConstraints(maxHeight: 500, maxWidth: 400),
