@@ -97,7 +97,7 @@ Future<T?> showOverlappingDialog<T>({
     ).context,
   );
 
-  return Navigator.of(context, rootNavigator: useRootNavigator)
+  return Navigator.of(context, rootNavigator: false)
       .push<T>(OverlappingDialogRoute<T>(
     context: context,
     builder: builder,
