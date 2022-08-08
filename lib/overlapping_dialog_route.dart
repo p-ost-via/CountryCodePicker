@@ -179,11 +179,13 @@ Future<T?> showMaterialDialog<T>({
   assert(debugCheckHasMaterialLocalizations(context));
 
   return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
-    MaterialDialogRoute<T>(
-      pageBuilder: (context, animation, secondaryAnimation) => builder(context),
-      barrierColor: barrierColor,
-      barrierDismissible: barrierDismissible,
-      barrierLabel: barrierLabel,
+    MaterialPageRoute<T>(
+      builder: builder,
+      fullscreenDialog: true,
+      // pageBuilder: (context, animation, secondaryAnimation) => builder(context),
+      // barrierColor: barrierColor,
+      // barrierDismissible: barrierDismissible,
+      // barrierLabel: barrierLabel,
       settings: routeSettings,
     ),
   );
