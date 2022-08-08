@@ -290,29 +290,25 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         builder: (context) => Center(
           child: Container(
             constraints: BoxConstraints(maxHeight: 500, maxWidth: 400),
-            child: SimpleDialog(
-              children: [
-                SelectionDialog(
-                  elements,
-                  favoriteElements,
-                  showCountryOnly: widget.showCountryOnly,
-                  emptySearchBuilder: widget.emptySearchBuilder,
-                  searchDecoration: widget.searchDecoration,
-                  searchStyle: widget.searchStyle,
-                  textStyle: widget.dialogTextStyle,
-                  boxDecoration: widget.boxDecoration,
-                  showFlag: widget.showFlagDialog != null
-                      ? widget.showFlagDialog
-                      : widget.showFlag,
-                  flagWidth: widget.flagWidth,
-                  size: widget.dialogSize,
-                  backgroundColor: widget.dialogBackgroundColor,
-                  barrierColor: widget.barrierColor,
-                  hideSearch: widget.hideSearch,
-                  closeIcon: widget.closeIcon,
-                  flagDecoration: widget.flagDecoration,
-                ),
-              ],
+            child: SelectionDialog(
+              elements,
+              favoriteElements,
+              showCountryOnly: widget.showCountryOnly,
+              emptySearchBuilder: widget.emptySearchBuilder,
+              searchDecoration: widget.searchDecoration,
+              searchStyle: widget.searchStyle,
+              textStyle: widget.dialogTextStyle,
+              boxDecoration: widget.boxDecoration,
+              showFlag: widget.showFlagDialog != null
+                  ? widget.showFlagDialog
+                  : widget.showFlag,
+              flagWidth: widget.flagWidth,
+              size: widget.dialogSize,
+              backgroundColor: widget.dialogBackgroundColor,
+              barrierColor: widget.barrierColor,
+              hideSearch: widget.hideSearch,
+              closeIcon: widget.closeIcon,
+              flagDecoration: widget.flagDecoration,
             ),
           ),
         ),
