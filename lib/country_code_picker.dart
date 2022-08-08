@@ -284,11 +284,12 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   void showCountryCodePickerDialog() {
     if (!UniversalPlatform.isAndroid && !UniversalPlatform.isIOS) {
-      showOverlappingDialog(
+      showDialog(
         barrierColor: widget.barrierColor ?? Colors.grey.withOpacity(0.5),
         // backgroundColor: widget.backgroundColor ?? Colors.transparent,
         context: context,
-        useSafeArea: true,
+        useSafeArea: false,
+        useRootNavigator: false,
         builder: (context) => Center(
           child: Container(
             constraints: BoxConstraints(maxHeight: 500, maxWidth: 400),
