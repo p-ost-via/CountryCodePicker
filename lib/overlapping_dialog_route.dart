@@ -176,7 +176,6 @@ Future<T?> showMaterialDialog<T>({
   bool useSafeArea = true,
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
-  Offset? anchorPoint,
 }) {
   assert(builder != null);
   assert(barrierDismissible != null);
