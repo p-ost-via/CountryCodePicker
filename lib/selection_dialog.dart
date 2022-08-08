@@ -62,7 +62,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(0.0),
         child: Container(
-          clipBehavior: Clip.none,
+          clipBehavior: Clip.hardEdge,
           width: widget.size?.width ?? MediaQuery.of(context).size.width,
           height:
               widget.size?.height ?? MediaQuery.of(context).size.height * 0.85,
