@@ -291,7 +291,8 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         builder: (context) => Center(
           child: Container(
             constraints: BoxConstraints(maxHeight: 500, maxWidth: 400),
-            child: Dialog(
+            child: Material(
+              color: Colors.transparent,
               child: SelectionDialog(
                 elements,
                 favoriteElements,
