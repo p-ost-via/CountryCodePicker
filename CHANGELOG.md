@@ -1,8 +1,8 @@
 ## 2.0.3
 
 - fixed dialog showing on mobile web
-- added eng localization as default search language in dialog
-- rearranged search results in dialog for convenience purposes
+- added eng localization as the default search language in dialog
+- rearranged search results in the dialog for convenience purposes
 - some minor fixes
 
 ## 2.0.2
