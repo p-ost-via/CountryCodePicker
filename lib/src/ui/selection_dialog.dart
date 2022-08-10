@@ -190,14 +190,20 @@ class _SelectionDialogState extends State<SelectionDialog> {
   }
 
   Widget _buildEmptySearchWidget(BuildContext context) {
+    Widget wrapIntoPadding(Widget child) {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: child,
+      );
+    }
+
     if (widget.emptySearchBuilder != null) {
-      return widget.emptySearchBuilder!(context);
+      return wrapIntoPadding(widget.emptySearchBuilder!(context));
     }
 
     return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        child: Text(CountryLocalizations.of(context)?.translate('no_country') ??
+      child: wrapIntoPadding(
+        Text(CountryLocalizations.of(context)?.translate('no_country') ??
             'No country found'),
       ),
     );

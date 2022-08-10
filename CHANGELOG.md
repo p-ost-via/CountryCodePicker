@@ -1,3 +1,10 @@
+## 2.0.3
+
+- fixed dialog showing on mobile web
+- added eng localization as default search language in dialog
+- rearranged search results in dialog for convenience purposes
+- some minor fixes
+
 ## 2.0.2
 
 - added localization for no_country text in italian and english (please open a pr with other languages if you know them 🙏)
