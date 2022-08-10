@@ -77,7 +77,7 @@ Future<T?> showMaterialDialog<T>({
   return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
     MaterialDialogRoute<T>(
       pageBuilder: (context, animation, secondaryAnimation) => builder(context),
-      // barrierColor: barrierColor,
+      barrierColor: barrierColor,
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel,
       settings: routeSettings,
