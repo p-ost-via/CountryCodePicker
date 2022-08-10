@@ -316,19 +316,19 @@ class CountryCodePickerState extends State<CountryCodePicker> {
     );
   }
 
-  Future<void> showGeneralDialog(BuildContext context) async {
+  Future<dynamic> showGeneralDialog(BuildContext context) async {
     final barrier = widget.barrierColor ?? Colors.grey.withOpacity(0.5);
     final dialogBuilder =
         (context) => _generalDialogWrapper(child: _selectionDialog());
     if (PickerPlatform.isWebMobile) {
       await _hideKeyboard();
-      showMaterialDialog(
+      return showMaterialDialog(
         barrierColor: barrier,
         context: context,
         builder: dialogBuilder,
       );
     } else {
-      showDialog(
+      return showDialog(
         barrierColor: barrier,
         context: context,
         builder: dialogBuilder,
