@@ -1,12 +1,13 @@
 import 'package:collection/collection.dart' show IterableExtension;
+import 'package:country_code_picker/src/misc/eng_localization.dart';
 import 'package:country_code_picker/src/misc/material_dialog_route.dart';
+import 'package:country_code_picker/src/misc/picker_platform.dart';
 import 'package:country_code_picker/src/model/country_code.dart';
 import 'package:country_code_picker/src/model/country_codes.dart';
 import 'package:country_code_picker/src/ui/selection_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 export 'model/country_code.dart';
 
@@ -129,6 +130,7 @@ class CountryCodePicker extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
+    EngLocalization.load();
     List<Map<String, String>> jsonList = countryList;
 
     List<CountryCode> elements =
@@ -289,24 +291,9 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   }
 
   Future<void> showCountryCodePickerDialog(BuildContext context) async {
-    hideKeyboard();
-    (!UniversalPlatform.isAndroid && !UniversalPlatform.isIOS
-            ? showMaterialDialog(
-                barrierColor:
-                    widget.barrierColor ?? Colors.grey.withOpacity(0.5),
-                // backgroundColor: widget.backgroundColor ?? Colors.transparent,
-                context: context,
-                builder: (context) => Center(
-                  child: Container(
-                    padding: widget.dialogInsetPadding,
-                    constraints: BoxConstraints(maxHeight: 600, maxWidth: 400),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: _selectionDialog(),
-                    ),
-                  ),
-                ),
-              )
+    await _hideKeyboard();
+    (PickerPlatform.isNotMobile
+            ? showGeneralDialog(context)
             : showMaterialModalBottomSheet(
                 barrierColor:
                     widget.barrierColor ?? Colors.grey.withOpacity(0.5),
@@ -329,8 +316,40 @@ class CountryCodePickerState extends State<CountryCodePicker> {
     );
   }
 
-  void hideKeyboard() {
+  Future<void> showGeneralDialog(BuildContext context) async {
+    final barrier = widget.barrierColor ?? Colors.grey.withOpacity(0.5);
+    final dialogBuilder =
+        (context) => _generalDialogWrapper(child: _selectionDialog());
+    if (PickerPlatform.isWebMobile) {
+      await _hideKeyboard();
+      showMaterialDialog(
+        barrierColor: barrier,
+        context: context,
+        builder: dialogBuilder,
+      );
+    } else {
+      showDialog(
+        barrierColor: barrier,
+        context: context,
+        builder: dialogBuilder,
+      );
+    }
+  }
+
+  Widget _generalDialogWrapper({required Widget child}) => Center(
+        child: Container(
+          padding: widget.dialogInsetPadding,
+          constraints: BoxConstraints(maxHeight: 600, maxWidth: 400),
+          child: Material(
+            color: Colors.transparent,
+            child: child,
+          ),
+        ),
+      );
+
+  Future<void> _hideKeyboard() async {
     try {
+      Future.delayed(Duration(milliseconds: 500));
       Focus.of(context).unfocus();
     } catch (_) {}
   }

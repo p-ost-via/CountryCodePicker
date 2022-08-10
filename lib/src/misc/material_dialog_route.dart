@@ -50,7 +50,7 @@ class MaterialDialogRoute<T> extends PageRoute<T> {
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    return child;
+    // return child;
     final PageTransitionsTheme theme = Theme.of(context).pageTransitionsTheme;
     return theme.buildTransitions<T>(
         this, context, animation, secondaryAnimation, child);

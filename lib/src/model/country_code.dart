@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:country_code_picker/src/misc/country_localizations.dart';
+import 'package:country_code_picker/src/misc/eng_localization.dart';
 import 'package:country_code_picker/src/model/country_codes.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -52,6 +53,10 @@ class CountryCode {
     return this
       ..name =
           CountryLocalizations.of(context)?.translate(this.code) ?? this.name;
+  }
+
+  String get engName {
+    return EngLocalization.data?[this.code] ?? '';
   }
 
   factory CountryCode.fromJson(Map<String, dynamic> json) {

@@ -58,6 +58,8 @@ class _SelectionDialogState extends State<SelectionDialog> {
   /// this is useful for filtering purpose
   late List<CountryCode> filteredElements;
 
+  String currentQuery = '';
+
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(0.0),
@@ -95,12 +97,28 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   child: TextField(
                     style: widget.searchStyle,
                     decoration: widget.searchDecoration,
-                    onChanged: _filterElements,
+                    onChanged: (value) => _filterElements(context, value),
                   ),
                 ),
               Expanded(
                 child: ListView(
                   children: [
+                    if (filteredElements.isNotEmpty &&
+                        currentQuery.isNotEmpty) ...[
+                      ...filteredElements
+                          .map<Widget>(
+                            (e) => SimpleDialogOption(
+                              child: _buildOption(e),
+                              onPressed: () {
+                                _selectItem(e);
+                              },
+                            ),
+                          )
+                          .toList(growable: false),
+                      const Divider(),
+                    ] else if (filteredElements.isEmpty &&
+                        currentQuery.isNotEmpty)
+                      _buildEmptySearchWidget(context),
                     widget.favoriteElements.isEmpty
                         ? const DecoratedBox(decoration: BoxDecoration())
                         : Column(
@@ -117,17 +135,17 @@ class _SelectionDialogState extends State<SelectionDialog> {
                               const Divider(),
                             ],
                           ),
-                    if (filteredElements.isEmpty)
-                      _buildEmptySearchWidget(context)
-                    else
-                      ...filteredElements.map(
-                        (e) => SimpleDialogOption(
-                          child: _buildOption(e),
-                          onPressed: () {
-                            _selectItem(e);
-                          },
-                        ),
-                      ),
+                    if (currentQuery.isEmpty)
+                      ...widget.elements
+                          .map(
+                            (e) => SimpleDialogOption(
+                              child: _buildOption(e),
+                              onPressed: () {
+                                _selectItem(e);
+                              },
+                            ),
+                          )
+                          .toList(growable: false),
                   ],
                 ),
               ),
@@ -177,8 +195,11 @@ class _SelectionDialogState extends State<SelectionDialog> {
     }
 
     return Center(
-      child: Text(CountryLocalizations.of(context)?.translate('no_country') ??
-          'No country found'),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: Text(CountryLocalizations.of(context)?.translate('no_country') ??
+            'No country found'),
+      ),
     );
   }
 
@@ -188,14 +209,16 @@ class _SelectionDialogState extends State<SelectionDialog> {
     super.initState();
   }
 
-  void _filterElements(String s) {
+  void _filterElements(BuildContext context, String s) {
     s = s.toUpperCase();
     setState(() {
+      currentQuery = s;
       filteredElements = widget.elements
           .where((e) =>
               e.code!.contains(s) ||
               e.dialCode!.contains(s) ||
-              e.name!.toUpperCase().contains(s))
+              e.name!.toUpperCase().contains(s) ||
+              e.engName.toUpperCase().contains(s))
           .toList();
     });
   }
