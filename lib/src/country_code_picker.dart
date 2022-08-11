@@ -95,7 +95,8 @@ class CountryCodePicker extends StatefulWidget {
     this.padding = const EdgeInsets.all(8.0),
     this.showCountryOnly = false,
     this.searchDecoration = const InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(12, 4, 12, 16)),
+      contentPadding: EdgeInsets.fromLTRB(12, 4, 12, 16),
+    ),
     this.searchStyle,
     this.dialogTextStyle,
     this.emptySearchBuilder,
