@@ -349,7 +349,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
 
   Future<void> _hideKeyboard() async {
     try {
-      Future.delayed(Duration(milliseconds: 500));
+      Future.delayed(Duration(milliseconds: 700));
       Focus.of(context).unfocus();
     } catch (_) {}
   }
