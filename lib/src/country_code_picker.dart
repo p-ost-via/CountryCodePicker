@@ -122,7 +122,7 @@ class CountryCodePicker extends StatefulWidget {
     this.countryList = codes,
     EdgeInsets dialogInsetPadding = const EdgeInsets.symmetric(
       horizontal: 40.0,
-      vertical: 24.0,
+      vertical: 10.0,
     ),
     Key? key,
   })  : dialogInsetPadding = dialogInsetPadding,
