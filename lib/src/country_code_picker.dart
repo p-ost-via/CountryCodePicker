@@ -248,19 +248,11 @@ class CountryCodePickerState extends State<CountryCodePicker> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.initialSelection != widget.initialSelection) {
-      if (widget.initialSelection != null) {
-        selectedItem = elements.firstWhere(
-            (e) =>
-                (e.code!.toUpperCase() ==
-                    widget.initialSelection!.toUpperCase()) ||
-                (e.dialCode == widget.initialSelection) ||
-                (e.name!.toUpperCase() ==
-                    widget.initialSelection!.toUpperCase()),
-            orElse: () => elements[0]);
-      } else {
-        selectedItem = elements[0];
-      }
+      selectedItem = _calculateInitialSelection();
       _onInit(selectedItem);
+    }
+    if (oldWidget.favorite != widget.favorite) {
+      favoriteElements = _calculateFavourites();
     }
   }
 
@@ -268,26 +260,8 @@ class CountryCodePickerState extends State<CountryCodePicker> {
   void initState() {
     super.initState();
 
-    if (widget.initialSelection != null) {
-      selectedItem = elements.firstWhere(
-          (e) =>
-              (e.code!.toUpperCase() ==
-                  widget.initialSelection!.toUpperCase()) ||
-              (e.dialCode == widget.initialSelection) ||
-              (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
-          orElse: () => elements[0]);
-    } else {
-      selectedItem = elements[0];
-    }
-
-    favoriteElements = elements
-        .where((e) =>
-            widget.favorite.firstWhereOrNull((f) =>
-                e.code!.toUpperCase() == f.toUpperCase() ||
-                e.dialCode == f ||
-                e.name!.toUpperCase() == f.toUpperCase()) !=
-            null)
-        .toList();
+    selectedItem = _calculateInitialSelection();
+    favoriteElements = _calculateFavourites();
   }
 
   Future<void> showCountryCodePickerDialog(BuildContext context) async {
@@ -335,6 +309,29 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       );
     }
   }
+
+  CountryCode _calculateInitialSelection() {
+    if (widget.initialSelection != null)
+      return elements.firstWhere(
+          (e) =>
+              (e.code!.toUpperCase() ==
+                  widget.initialSelection!.toUpperCase()) ||
+              (e.dialCode == widget.initialSelection) ||
+              (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
+          orElse: () => elements[0]);
+    else {
+      return elements[0];
+    }
+  }
+
+  List<CountryCode> _calculateFavourites() => elements
+      .where((e) =>
+          widget.favorite.firstWhereOrNull((f) =>
+              e.code!.toUpperCase() == f.toUpperCase() ||
+              e.dialCode == f ||
+              e.name!.toUpperCase() == f.toUpperCase()) !=
+          null)
+      .toList();
 
   Widget _generalDialogWrapper({required Widget child}) => Center(
         child: Container(
