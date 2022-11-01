@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart' show IterableExtension;
+import 'package:collection/equality.dart';
 import 'package:country_code_picker/src/misc/eng_localization.dart';
 import 'package:country_code_picker/src/misc/material_dialog_route.dart';
 import 'package:country_code_picker/src/misc/picker_platform.dart';
@@ -251,7 +252,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       selectedItem = _calculateInitialSelection();
       _onInit(selectedItem);
     }
-    if (oldWidget.favorite != widget.favorite) {
+    if (ListEquality().equals(oldWidget.favorite, widget.favorite)) {
       favoriteElements = _calculateFavourites();
     }
   }
