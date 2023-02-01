@@ -1,12 +1,11 @@
-import 'package:collection/collection.dart' show IterableExtension;
-import 'package:collection/equality.dart';
+import 'package:collection/collection.dart'
+    show IterableExtension, ListExtensions;
 import 'package:country_code_picker/src/misc/eng_localization.dart';
 import 'package:country_code_picker/src/misc/material_dialog_route.dart';
 import 'package:country_code_picker/src/misc/picker_platform.dart';
 import 'package:country_code_picker/src/model/country_code.dart';
 import 'package:country_code_picker/src/model/country_codes.dart';
 import 'package:country_code_picker/src/ui/selection_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -209,8 +208,8 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                     widget.showOnlyCountryWhenClosed
                         ? selectedItem!.toCountryStringOnly()
                         : selectedItem.toString(),
-                    style:
-                        widget.textStyle ?? Theme.of(context).textTheme.button,
+                    style: widget.textStyle ??
+                        Theme.of(context).textTheme.labelLarge,
                     overflow: widget.textOverflow,
                   ),
                 ),
@@ -252,7 +251,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       selectedItem = _calculateInitialSelection();
       _onInit(selectedItem);
     }
-    if (ListEquality().equals(oldWidget.favorite, widget.favorite)) {
+    if (oldWidget.favorite.equals(widget.favorite)) {
       favoriteElements = _calculateFavourites();
     }
   }
