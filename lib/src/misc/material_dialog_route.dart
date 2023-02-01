@@ -9,8 +9,7 @@ class MaterialDialogRoute<T> extends PageRoute<T> {
     Duration transitionDuration = const Duration(milliseconds: 200),
     RouteTransitionsBuilder? transitionBuilder,
     RouteSettings? settings,
-  })  : assert(barrierDismissible != null),
-        _barrierDismissible = barrierDismissible,
+  })  : _barrierDismissible = barrierDismissible,
         _barrierLabel = barrierLabel,
         _barrierColor = barrierColor,
         _transitionDuration = transitionDuration,
@@ -69,9 +68,6 @@ Future<T?> showMaterialDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
-  assert(builder != null);
-  assert(barrierDismissible != null);
-  assert(useRootNavigator != null);
   assert(debugCheckHasMaterialLocalizations(context));
 
   return Navigator.of(context, rootNavigator: useRootNavigator).push<T>(
