@@ -17,6 +17,7 @@ class SelectionDialog extends StatefulWidget {
   final Size? size;
   final bool hideSearch;
   final Icon? closeIcon;
+  final String? closeButtonSemanticLabel;
 
   /// Background color of SelectionDialog
   final Color? backgroundColor;
@@ -45,6 +46,7 @@ class SelectionDialog extends StatefulWidget {
     this.barrierColor,
     this.hideSearch = false,
     this.closeIcon,
+    this.closeButtonSemanticLabel,
   })  : this.searchDecoration = searchDecoration.prefixIcon == null
             ? searchDecoration.copyWith(prefixIcon: Icon(Icons.search))
             : searchDecoration,
@@ -87,11 +89,17 @@ class _SelectionDialogState extends State<SelectionDialog> {
             children: [
               Material(
                 color: Colors.transparent,
-                child: IconButton(
-                  padding: const EdgeInsets.all(0),
-                  iconSize: 20,
-                  icon: widget.closeIcon!,
-                  onPressed: () => Navigator.pop(context),
+                child: MergeSemantics(
+                  child: Semantics(
+                    button: true,
+                    label: widget.closeButtonSemanticLabel,
+                    child: IconButton(
+                      padding: const EdgeInsets.all(0),
+                      iconSize: 20,
+                      icon: widget.closeIcon!,
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
                 ),
               ),
               if (!widget.hideSearch)
