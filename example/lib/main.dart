@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +12,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    SemanticsBinding.instance.ensureSemantics();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final closeButtonSemanticLabel = "Close";
     return new MaterialApp(
       supportedLocales: [
         Locale("af"),
@@ -109,6 +117,7 @@ class _MyAppState extends State<MyApp> {
                 //Get the country information relevant to the initial selection
                 onInit: (code) => print(
                     "on init ${code?.name} ${code?.dialCode} ${code?.name}"),
+                closeButtonSemanticLabel: closeButtonSemanticLabel,
               ),
               CountryCodePicker(
                 onChanged: print,
@@ -120,6 +129,7 @@ class _MyAppState extends State<MyApp> {
                 flagDecoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
                 ),
+                closeButtonSemanticLabel: closeButtonSemanticLabel,
               ),
               SizedBox(
                 width: 400,
@@ -134,6 +144,7 @@ class _MyAppState extends State<MyApp> {
                   showCountryOnly: true,
                   showOnlyCountryWhenClosed: true,
                   alignLeft: true,
+                  closeButtonSemanticLabel: closeButtonSemanticLabel,
                 ),
               ),
               SizedBox(
@@ -145,6 +156,7 @@ class _MyAppState extends State<MyApp> {
                   showCountryOnly: true,
                   showOnlyCountryWhenClosed: true,
                   favorite: ['+39', 'FR'],
+                  closeButtonSemanticLabel: closeButtonSemanticLabel,
                 ),
               ),
               SizedBox(
@@ -157,6 +169,7 @@ class _MyAppState extends State<MyApp> {
                   showCountryOnly: true,
                   showOnlyCountryWhenClosed: true,
                   favorite: ['+39', 'FR'],
+                  closeButtonSemanticLabel: closeButtonSemanticLabel,
                 ),
               ),
             ],

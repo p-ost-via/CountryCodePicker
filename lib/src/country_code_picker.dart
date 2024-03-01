@@ -26,6 +26,7 @@ class CountryCodePicker extends StatefulWidget {
   final Function(CountryCode?)? builder;
   final bool enabled;
   final TextOverflow textOverflow;
+  final String? closeButtonSemanticLabel;
   final Icon closeIcon;
 
   /// Barrier color of ModalBottomSheet
@@ -119,6 +120,7 @@ class CountryCodePicker extends StatefulWidget {
     this.dialogSize,
     this.dialogBackgroundColor,
     this.closeIcon = const Icon(Icons.close),
+    this.closeButtonSemanticLabel,
     this.countryList = codes,
     EdgeInsets dialogInsetPadding = const EdgeInsets.symmetric(
       horizontal: 40.0,
@@ -369,6 +371,7 @@ class CountryCodePickerState extends State<CountryCodePicker> {
         barrierColor: widget.barrierColor,
         hideSearch: widget.hideSearch,
         closeIcon: widget.closeIcon,
+        closeButtonSemanticLabel: widget.closeButtonSemanticLabel,
         flagDecoration: widget.flagDecoration,
       );
 
